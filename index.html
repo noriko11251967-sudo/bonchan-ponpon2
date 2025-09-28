@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>黒猫ポンポンゲーム</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #fcefee;
+      margin: 0;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    #score { font-size: 24px; margin: 10px; }
+    #cat {
+      width: 80vw;       /* 画面幅の80%に自動調整 */
+      max-width: 400px;  /* 最大でも400pxまで */
+      cursor: pointer;
+    }
+    #timer { margin-top: 20px; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <h1>黒猫のお尻ポンポン🐈‍⬛</h1>
+  <p id="score">スコア: 0</p>
+  <img id="cat" src="blackcat.png" alt="黒猫">
+  <p id="timer">残り時間: 10秒</p>
+
+  <script>
+    let score = 0;
+    let time = 10;
+    const scoreEl = document.getElementById("score");
+    const timerEl = document.getElementById("timer");
+    const cat = document.getElementById("cat");
+
+    cat.addEventListener("click", () => {
+      score++;
+      scoreEl.textContent = "スコア: " + score + " にゃ〜🐾";
+    });
+
+    const timer = setInterval(() => {
+      time--;
+      timerEl.textContent = "残り時間: " + time + "秒";
+      if (time <= 0) {
+        clearInterval(timer);
+        cat.style.pointerEvents = "none";
+        timerEl.textContent = "ゲーム終了！";
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
